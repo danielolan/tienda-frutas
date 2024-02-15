@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from 'react';
+import Login from './login/Login';
+import ListaFrutas from './frutas/ListaFrutas';
+const usuarios = [
+  { usuario: 'usuario1', password: 'password1' },
+  { usuario: 'usuario2', password: 'password2' },
+];
 function App() {
+  const [usuarioAutenticado, setUsuarioAutenticado] = useState(false);
+
+  const manejarAutenticacion = (usuario, password) => {
+    const usuarioValido = usuarios.some(u => u.usuario === usuario && u.password === password);
+    if (usuarioValido) {
+      setUsuarioAutenticado(true);
+    } else {
+      alert('Usuario o contraseña incorrectos');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-           Learn React
-        </a>
-      </header>
+    <div>
+      {!usuarioAutenticado ? (
+        <Login onLogin={manejarAutenticacion} />
+      ) : (
+        <ListaFrutas />
+      )}
     </div>
   );
 }

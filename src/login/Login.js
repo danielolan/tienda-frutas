@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './Login.css'; // Asegúrate de crear este archivo CSS para los estilos
 
-function Login() {
+function Login({ onLogin }) {
+
   const [usuario, setUsuario] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Usuario:', usuario, 'Contraseña:', password);
-    // Aquí podrías agregar la lógica para verificar las credenciales
+    onLogin(usuario, password);
   };
 
   return (

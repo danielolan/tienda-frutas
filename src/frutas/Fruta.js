@@ -1,6 +1,6 @@
 // Fruta.js
 import React from 'react';
-import './Fruta.css'; // Asegúrate de crear este archivo para los estilos
+import './Fruta.css'; 
 
 function Fruta({ nombre, precio }) {
   return (

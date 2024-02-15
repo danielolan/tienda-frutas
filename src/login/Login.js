@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import './Login.css'; // Asegúrate de crear este archivo CSS para los estilos
+import './Login.css'; // Asegúrate de tener este archivo CSS para los estilos
 
 function Login({ onLogin }) {
-
   const [usuario, setUsuario] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin(usuario, password);
+    onLogin(usuario, password); // Llama a la función de autenticación pasada por el componente padre
   };
 
   return (

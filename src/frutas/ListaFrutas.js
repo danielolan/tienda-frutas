@@ -1,23 +1,37 @@
-// ListaFrutas.js
-import React from 'react';
+import React, { Component } from 'react';
 import Fruta from './Fruta';
-import './ListaFrutas.css'; // Asegúrate de crear este archivo para los estilos
+import './ListaFrutas.css';
 
-const frutas = [
-  { id: 1, nombre: 'Manzana', precio: 0.99 },
-  { id: 2, nombre: 'Banana', precio: 0.79 },
-  { id: 3, nombre: 'Naranja', precio: 0.89 },
-  // Agrega más frutas según lo desees
-];
+class ListaFrutas extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      frutas: []
+    };
+  }
 
-function ListaFrutas() {
-  return (
-    <div className="lista-frutas">
-      {frutas.map(fruta => (
-        <Fruta key={fruta.id} nombre={fruta.nombre} precio={fruta.precio} />
-      ))}
-    </div>
-  );
+  componentDidMount() {
+    fetch('/frutas.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => this.setState({ frutas: data.frutas }))
+      .catch(error => console.error("Error al cargar las frutas:", error));
+  }
+
+  render() {
+    const { frutas } = this.state;
+    return (
+      <div className="lista-frutas">
+        {frutas.map(fruta => (
+          <Fruta key={fruta.id} nombre={fruta.nombre} precio={fruta.precio} />
+        ))}
+      </div>
+    );
+  }
 }
 
 export default ListaFrutas;

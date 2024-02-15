@@ -1,5 +1,7 @@
+// ListaFrutas.js
 import React from 'react';
-import './ListaFrutas.css'; // No olvides crear este archivo para tus estilos
+import Fruta from './Fruta';
+import './ListaFrutas.css'; // Asegúrate de crear este archivo para los estilos
 
 const frutas = [
   { id: 1, nombre: 'Manzana', precio: 0.99 },
@@ -11,12 +13,9 @@ const frutas = [
 function ListaFrutas() {
   return (
     <div className="lista-frutas">
-      <h2>Frutas Disponibles</h2>
-      <ul>
-        {frutas.map(fruta => (
-          <li key={fruta.id}>{fruta.nombre} - ${fruta.precio}</li>
-        ))}
-      </ul>
+      {frutas.map(fruta => (
+        <Fruta key={fruta.id} nombre={fruta.nombre} precio={fruta.precio} />
+      ))}
     </div>
   );
 }
